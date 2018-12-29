@@ -1,0 +1,106 @@
+POST _template/es_logs
+{
+  "index_patterns": [
+    "es_logs*"
+  ],
+  "settings": {
+    "index": {
+      "number_of_shards": "5",
+      "number_of_replicas": "1"
+    }
+  },
+  "mappings": {
+    "doc": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "@version": {
+          "type": "long"
+        },
+        "action": {
+          "type": "keyword"
+        },
+        "cause_by": {
+          "type": "text"
+        },
+        "exception": {
+          "type": "text"
+        },
+        "exception_type": {
+          "type": "keyword"
+        },
+        "host": {
+          "properties": {
+            "architecture": {
+              "type": "keyword"
+            },
+            "containerized": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "os": {
+              "enabled": false
+            }
+          }
+        },
+        "index": {
+          "type": "keyword"
+        },
+        "input": {
+          "properties": {
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
+        "log": {
+          "properties": {
+            "flags": {
+              "type": "keyword"
+            }
+          }
+        },
+        "log_time": {
+          "type": "date"
+        },
+        "message": {
+          "type": "text"
+        },
+        "node": {
+          "type": "keyword"
+        },
+        "original_message": {
+          "type": "text"
+        },
+        "prospector": {
+          "properties": {
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
+        "severity": {
+          "type": "keyword"
+        },
+        "source": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "tags": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
